@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Estudos — Língua Portuguesa · Year 9</title>
+<style>
+  :root {
+    --blue-50: #E6F1FB; --blue-100: #B5D4F4; --blue-600: #185FA5; --blue-800: #0C447C; --blue-900: #042C53;
+    --teal-50: #E1F5EE; --teal-100: #9FE1CB; --teal-600: #0F6E56; --teal-800: #085041;
+    --amber-50: #FAEEDA; --amber-100: #FAC775; --amber-600: #854F0B; --amber-800: #633806;
+    --purple-50: #EEEDFE; --purple-100: #CECBF6; --purple-600: #534AB7; --purple-800: #3C3489;
+    --coral-50: #FAECE7; --coral-100: #F5C4B3; --coral-600: #993C1D; --coral-800: #712B13;
+    --green-50: #EAF3DE; --green-100: #C0DD97; --green-600: #3B6D11; --green-800: #27500A;
+    --gray-50: #F1EFE8; --gray-100: #D3D1C7; --gray-400: #888780; --gray-800: #444441;
+    --accent: #185FA5;
+    --accent-light: #E6F1FB;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #f7f8fc;
+    color: #1a1a2e;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0C447C 0%, #185FA5 60%, #378ADD 100%);
+    color: white;
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+  }
+  .school-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.4rem; }
+  header p { font-size: 1rem; opacity: 0.85; }
+  .meta-row {
+    display: flex; gap: 2rem; justify-content: center; margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    background: rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .meta-item strong { display: block; font-size: 15px; margin-bottom: 2px; }
+
+  /* NAV */
+  nav {
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0 2rem;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+  }
+  nav ul {
+    display: flex; list-style: none; gap: 0; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav ul::-webkit-scrollbar { display: none; }
+  nav a {
+    display: block;
+    padding: 14px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748b;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  nav a:hover, nav a.active { color: var(--accent); border-color: var(--accent); }
+
+  /* MAIN */
+  main { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* SECTIONS */
+  section { margin-bottom: 3rem; }
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--blue-50);
+  }
+  .section-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .section-header h2 { font-size: 1.35rem; font-weight: 700; color: var(--blue-800); }
+  .section-header p { font-size: 13px; color: #64748b; margin-top: 2px; }
+
+  /* TOPIC CARDS */
+  .topic-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    margin-bottom: 1.2rem;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .topic-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+  .topic-title {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .topic-title h3 { font-size: 15px; font-weight: 600; color: #1e293b; display: flex; align-items: center; gap: 10px; }
+  .topic-title .num {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: var(--blue-50); color: var(--blue-600);
+    font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .chevron {
+    color: #94a3b8; font-size: 18px;
+    transition: transform 0.25s;
+    display: inline-block;
+  }
+  .topic-title.open .chevron { transform: rotate(180deg); }
+  .topic-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid #f1f5f9;
+  }
+  .topic-body.open { display: block; }
+
+  /* DEFINITION TABLE */
+  .def-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 14px; }
+  .def-table th {
+    background: var(--blue-800); color: white;
+    padding: 10px 14px; text-align: left; font-weight: 600; font-size: 13px;
+  }
+  .def-table th:first-child { border-radius: 8px 0 0 0; }
+  .def-table th:last-child { border-radius: 0 8px 0 0; }
+  .def-table td { padding: 10px 14px; border-bottom: 1px solid #f1f5f9; }
+  .def-table tr:nth-child(even) td { background: #f8fafc; }
+  .def-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  .def-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+  .term { font-weight: 600; color: var(--blue-600); }
+  .ex { font-size: 12px; color: #64748b; margin-top: 3px; font-style: italic; }
+
+  /* PILL TAGS */
+  .tag-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tag {
+    padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;
+    border: 1px solid;
+  }
+  .tag-blue { background: var(--blue-50); color: var(--blue-800); border-color: var(--blue-100); }
+  .tag-teal { background: var(--teal-50); color: var(--teal-800); border-color: var(--teal-100); }
+  .tag-amber { background: var(--amber-50); color: var(--amber-800); border-color: var(--amber-100); }
+  .tag-purple { background: var(--purple-50); color: var(--purple-800); border-color: var(--purple-100); }
+  .tag-coral { background: var(--coral-50); color: var(--coral-800); border-color: var(--coral-100); }
+
+  /* COMPARE BOXES */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+  .compare-box { background: #f8fafc; border-radius: 10px; padding: 14px; border: 1px solid #e2e8f0; }
+  .compare-box h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .compare-box ul { list-style: none; }
+  .compare-box ul li { font-size: 13px; color: #475569; padding: 3px 0; }
+  .compare-box ul li::before { content: "•"; margin-right: 6px; }
+  .compare-blue { border-top: 3px solid var(--blue-600); }
+  .compare-teal { border-top: 3px solid var(--teal-600); }
+
+  /* CALLOUT */
+  .callout {
+    border-radius: 10px; padding: 14px 18px; margin: 12px 0;
+    font-size: 14px; line-height: 1.6;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .callout-blue { background: var(--blue-50); border-left: 4px solid var(--blue-600); color: var(--blue-800); }
+  .callout-amber { background: var(--amber-50); border-left: 4px solid #EF9F27; color: var(--amber-800); }
+  .callout-teal { background: var(--teal-50); border-left: 4px solid var(--teal-600); color: var(--teal-800); }
+  .callout-purple { background: var(--purple-50); border-left: 4px solid var(--purple-600); color: var(--purple-800); }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; margin-top: 12px; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 14px; border-radius: 8px; font-size: 14px;
+    margin-bottom: 6px; background: #f8fafc; border: 1px solid #e9eef5;
+    cursor: pointer; transition: background 0.15s;
+  }
+  .checklist li:hover { background: var(--blue-50); }
+  .checklist li.checked { background: var(--green-50); border-color: var(--green-100); text-decoration: line-through; color: #64748b; }
+  .check-box {
+    width: 20px; height: 20px; border: 2px solid #cbd5e1; border-radius: 5px;
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    margin-top: 1px; transition: all 0.15s;
+  }
+  .checked .check-box { background: var(--green-600); border-color: var(--green-600); color: white; font-size: 12px; }
+
+  /* TEXT WITH READING */
+  .texto-box {
+    background: var(--amber-50);
+    border-left: 4px solid #EF9F27;
+    border-radius: 0 10px 10px 0;
+    padding: 18px 20px;
+    margin: 14px 0;
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: #3d2e0a;
+  }
+  .texto-box .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--amber-600); font-weight: 700; margin-bottom: 8px; }
+
+  /* PRACTICE QUESTIONS */
+  .question-card {
+    background: white; border: 1px solid #e2e8f0; border-radius: 12px;
+    padding: 18px 20px; margin-bottom: 12px;
+  }
+  .question-card .q-num {
+    font-size: 11px; font-weight: 700; color: var(--blue-600);
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
+  }
+  .question-card p { font-size: 14px; color: #334155; line-height: 1.7; }
+  .answer-area {
+    margin-top: 12px;
+    width: 100%;
+    min-height: 80px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #1e293b;
+    resize: vertical;
+    background: #f8fafc;
+    transition: border-color 0.2s;
+  }
+  .answer-area:focus { outline: none; border-color: var(--accent); background: white; }
+  .category-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; margin: 24px 0 12px;
+    color: #94a3b8;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .category-label::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
+
+  /* QUIZ */
+  .quiz-card {
+    background: white; border: 1px solid #e2e8f0; border-radius: 14px;
+    padding: 22px; margin-bottom: 14px;
+    transition: box-shadow 0.2s;
+  }
+  .quiz-card p { font-size: 15px; color: #1e293b; margin-bottom: 16px; font-weight: 500; }
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option {
+    padding: 11px 16px; border-radius: 8px; border: 1.5px solid #e2e8f0;
+    font-size: 14px; cursor: pointer; transition: all 0.15s;
+    background: #f8fafc; color: #334155;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .option:hover { border-color: var(--accent); background: var(--blue-50); color: var(--blue-800); }
+  .option.correct { background: var(--green-50); border-color: #3B6D11; color: var(--green-800); }
+  .option.wrong { background: #FCEBEB; border-color: #A32D2D; color: #501313; }
+  .option.disabled { pointer-events: none; }
+  .option-letter {
+    width: 22px; height: 22px; border-radius: 6px; background: #e2e8f0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+    color: #64748b;
+  }
+  .option.correct .option-letter { background: #3B6D11; color: white; }
+  .option.wrong .option-letter { background: #A32D2D; color: white; }
+  .feedback { margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 13px; line-height: 1.6; display: none; }
+  .feedback.show { display: block; }
+  .feedback.ok { background: var(--green-50); color: var(--green-800); border: 1px solid var(--green-100); }
+  .feedback.err { background: #FCEBEB; color: #501313; border: 1px solid #F7C1C1; }
+  .quiz-score {
+    background: var(--blue-800); color: white; border-radius: 14px;
+    padding: 24px; text-align: center; display: none; margin-top: 20px;
+  }
+  .score-big { font-size: 3rem; font-weight: 800; }
+  .score-label { font-size: 14px; opacity: 0.8; margin-top: 4px; }
+  #restart-btn {
+    margin-top: 16px; background: white; color: var(--blue-800);
+    border: none; border-radius: 8px; padding: 10px 24px;
+    font-weight: 600; font-size: 14px; cursor: pointer;
+  }
+  .quiz-progress {
+    display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .prog-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: #e2e8f0;
+    transition: background 0.2s;
+  }
+  .prog-dot.done-ok { background: #3B6D11; }
+  .prog-dot.done-err { background: #A32D2D; }
+
+  /* STUDY TIPS */
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .tip-card {
+    background: white; border: 1px solid #e2e8f0; border-radius: 12px;
+    padding: 18px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .tip-icon { font-size: 24px; }
+  .tip-card h4 { font-size: 14px; font-weight: 700; color: #1e293b; }
+  .tip-card p { font-size: 13px; color: #64748b; line-height: 1.5; }
+
+  /* PROGRESS TRACKER */
+  .progress-bar-wrap { background: #e2e8f0; border-radius: 99px; height: 8px; margin: 8px 0 4px; }
+  .progress-bar { background: var(--accent); height: 8px; border-radius: 99px; transition: width 0.4s; }
+  .progress-label { font-size: 12px; color: #64748b; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.4rem; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .meta-row { gap: 10px; }
+    nav a { padding: 12px 12px; font-size: 12px; }
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--blue-900); color: rgba(255,255,255,0.7);
+    text-align: center; padding: 2rem; font-size: 13px;
+    margin-top: 4rem;
+  }
+  footer strong { color: white; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="school-badge">🍁 MapleBear</div>
+  <h1>Língua Portuguesa — Year 9</h1>
+  <p>Guia de Estudos Completo · Ms. Ivana Tavares</p>
+  <div class="meta-row">
+    <div class="meta-item"><strong>5 tópicos</strong>Conteúdo</div>
+    <div class="meta-item"><strong>Texto argumentativo</strong>Gênero-foco</div>
+    <div class="meta-item"><strong>Quiz interativo</strong>Incluso</div>
+    <div class="meta-item"><strong>Pronome relativo</strong>Ponto-chave</div>
+  </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#conteudo" class="active">Conteúdo</a></li>
+    <li><a href="#texto">Texto Base</a></li>
+    <li><a href="#exercicios">Exercícios</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#checklist">Checklist</a></li>
+    <li><a href="#dicas">Dicas</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- CONTEÚDO -->
+<section id="conteudo">
+  <div class="section-header">
+    <div class="section-icon" style="background:#E6F1FB">📚</div>
+    <div>
+      <h2>Conteúdo da Avaliação</h2>
+      <p>Clique em cada tópico para expandir os detalhes</p>
+    </div>
+  </div>
+
+  <!-- TÓPICO 1 -->
+  <div class="topic-card">
+    <div class="topic-title" onclick="toggle(this)">
+      <h3><span class="num">1</span>Leitura e Interpretação Textual</h3>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body open">
+      <div class="callout callout-blue">
+        <span class="callout-icon">💡</span>
+        <div>Foco em <strong>texto informativo-argumentativo</strong>: o autor expõe informações e defende uma posição, usando argumentos para convencer o leitor.</div>
+      </div>
+      <table class="def-table" style="margin-top:14px">
+        <thead><tr><th>Elemento</th><th>O que é / Como identificar</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="term">Tese</td>
+            <td>A opinião central do autor. Geralmente aparece no início ou no final do texto.<div class="ex">Ex: "O uso de celulares por crianças deve ser controlado."</div></td>
+          </tr>
+          <tr>
+            <td class="term">Argumento</td>
+            <td>Razões usadas para sustentar a tese. Podem ser dados, exemplos, citações de especialistas, comparações.</td>
+          </tr>
+          <tr>
+            <td class="term">Efeito de verdade</td>
+            <td>Recursos que tornam o texto mais convincente: uso de estatísticas, vocabulário técnico, citações de autoridade, generalização.<div class="ex">Ex: "Estudos da OMS indicam que..."</div></td>
+          </tr>
+          <tr>
+            <td class="term">Características do gênero</td>
+            <td>Linguagem formal, estrutura lógica (apresentação → desenvolvimento → conclusão), uso de conectivos argumentativos.<div class="ex">Ex: "portanto", "no entanto", "além disso"</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TÓPICO 2 -->
+  <div class="topic-card">
+    <div class="topic-title" onclick="toggle(this)">
+      <h3><span class="num">2</span>Oração, Frase e Período</h3>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <table class="def-table" style="margin-top:10px">
+        <thead><tr><th>Conceito</th><th>Definição</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td class="term">Frase</td><td>Enunciado com sentido completo. Pode ter ou não verbo.</td><td><em>"Silêncio!" / "Que dia bonito!"</em></td></tr>
+          <tr><td class="term">Oração</td><td>Frase ou segmento de frase que possui verbo (ou locução verbal).</td><td><em>"Ela chegou." / "Que venhas logo."</em></td></tr>
+          <tr><td class="term">Período simples</td><td>Contém uma única oração.</td><td><em>"Ana estuda muito."</em></td></tr>
+          <tr><td class="term">Período composto</td><td>Contém duas ou mais orações.</td><td><em>"Ana estuda porque quer passar."</em></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TÓPICO 3 -->
+  <div class="topic-card">
+    <div class="topic-title" onclick="toggle(this)">
+      <h3><span class="num">3</span>Períodos Compostos por Subordinação</h3>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <p style="font-size:14px;color:#475569;margin-top:10px;margin-bottom:14px">Na subordinação, uma oração (<strong>subordinada</strong>) depende sintaticamente de outra (<strong>principal</strong>).</p>
+
+      <p style="font-weight:700;color:#1e293b;font-size:14px;margin-bottom:10px">🔷 Orações Subordinadas Substantivas</p>
+      <p style="font-size:13px;color:#64748b;margin-bottom:10px">Exercem funções sintáticas típicas de um substantivo (sujeito, objeto, predicativo, etc.).</p>
+      <table class="def-table">
+        <thead><tr><th>Tipo</th><th>Função</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td class="term">Subjetiva</td><td>Sujeito da oração principal</td><td><em>"<u>Que você estude</u> é essencial."</em></td></tr>
+          <tr><td class="term">Predicativa</td><td>Predicativo do sujeito</td><td><em>"O problema é <u>que ele não veio</u>."</em></td></tr>
+          <tr><td class="term">Objetiva direta</td><td>Objeto direto</td><td><em>"Quero <u>que você venha</u>."</em></td></tr>
+          <tr><td class="term">Objetiva indireta</td><td>Objeto indireto</td><td><em>"Preciso de <u>que me ajudes</u>."</em></td></tr>
+          <tr><td class="term">Apositiva</td><td>Aposto</td><td><em>"Só quero uma coisa: <u>que sejas feliz</u>."</em></td></tr>
+          <tr><td class="term">Completiva nominal</td><td>Complemento nominal</td><td><em>"Tenho medo de <u>que algo aconteça</u>."</em></td></tr>
+        </tbody>
+      </table>
+
+      <p style="font-weight:700;color:#1e293b;font-size:14px;margin:18px 0 10px">🔶 Orações Subordinadas Adjetivas</p>
+      <p style="font-size:13px;color:#64748b;margin-bottom:12px">Exercem a função de adjunto adnominal, ou seja, caracterizam um substantivo (antecedente).</p>
+      <div class="compare-grid">
+        <div class="compare-box compare-blue">
+          <h4 style="color:var(--blue-600)">Restritiva</h4>
+          <ul>
+            <li>Restringe o sentido do antecedente</li>
+            <li>SEM vírgulas</li>
+            <li>Indispensável para o sentido</li>
+          </ul>
+          <div class="callout callout-blue" style="margin-top:10px;font-size:13px">
+            <span>📌</span><div><em>"Os alunos <u>que estudaram</u> passaram."</em><br>(só os que estudaram)</div>
+          </div>
+        </div>
+        <div class="compare-box compare-teal">
+          <h4 style="color:var(--teal-600)">Explicativa</h4>
+          <ul>
+            <li>Acrescenta informação extra</li>
+            <li>COM vírgulas</li>
+            <li>Dispensável para o sentido</li>
+          </ul>
+          <div class="callout callout-teal" style="margin-top:10px;font-size:13px">
+            <span>📌</span><div><em>"Os alunos, <u>que estudaram</u>, passaram."</em><br>(todos estudaram)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TÓPICO 4 -->
+  <div class="topic-card">
+    <div class="topic-title" onclick="toggle(this)">
+      <h3><span class="num">4</span>Regência com Pronome Relativo</h3>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="callout callout-amber">
+        <span class="callout-icon">⚠️</span>
+        <div>Atenção! O verbo da oração subordinada determina se é necessária uma <strong>preposição</strong> antes do pronome relativo.</div>
+      </div>
+      <table class="def-table" style="margin-top:14px">
+        <thead><tr><th>Verbo exige</th><th>Construção correta</th></tr></thead>
+        <tbody>
+          <tr><td class="term">Obj. direto (sem prep.)</td><td><em>"O livro <strong>que</strong> li é ótimo."</em> <span style="color:#64748b">(li o livro)</span></td></tr>
+          <tr><td class="term">Obj. indireto (de)</td><td><em>"O livro <strong>de que</strong> gosto é ótimo."</em> <span style="color:#64748b">(gosto do livro)</span></td></tr>
+          <tr><td class="term">Obj. indireto (em)</td><td><em>"O assunto <strong>em que</strong> penso é difícil."</em></td></tr>
+          <tr><td class="term">Obj. indireto (a)</td><td><em>"A pessoa <strong>a quem</strong> recorri foi embora."</em></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TÓPICO 5 -->
+  <div class="topic-card">
+    <div class="topic-title" onclick="toggle(this)">
+      <h3><span class="num">5</span>Pronome Relativo × Conjunção Integrante</h3>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="topic-body">
+      <div class="compare-grid">
+        <div class="compare-box compare-blue">
+          <h4 style="color:var(--blue-600)">Pronome Relativo</h4>
+          <ul>
+            <li>Retoma um antecedente (substantivo)</li>
+            <li>Exerce função sintática na oração</li>
+            <li>Pode ser substituído (que, quem, cujo, onde, o qual...)</li>
+          </ul>
+          <div style="margin-top:10px;font-size:13px;background:var(--blue-50);padding:10px;border-radius:8px;color:var(--blue-800)">
+            <em>"O filme <strong>que</strong> assisti foi ótimo."</em><br>
+            → "que" = antecedente: "filme" / função: obj. direto
+          </div>
+        </div>
+        <div class="compare-box compare-teal">
+          <h4 style="color:var(--teal-600)">Conjunção Integrante</h4>
+          <ul>
+            <li>NÃO retoma antecedente</li>
+            <li>NÃO tem função sintática</li>
+            <li>Apenas introduz a oração subordinada</li>
+          </ul>
+          <div style="margin-top:10px;font-size:13px;background:var(--teal-50);padding:10px;border-radius:8px;color:var(--teal-800)">
+            <em>"Sei <strong>que</strong> você virá."</em><br>
+            → "que" = apenas conectivo, sem antecedente
+          </div>
+        </div>
+      </div>
+      <div class="callout callout-purple" style="margin-top:14px">
+        <span class="callout-icon">🔑</span>
+        <div><strong>Dica prática:</strong> Se você conseguir substituir o "que" por "o qual / a qual", é pronome relativo. Se não conseguir, é conjunção integrante.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEXTO BASE -->
+<section id="texto">
+  <div class="section-header">
+    <div class="section-icon" style="background:#FAEEDA">📄</div>
+    <div>
+      <h2>Texto Base para Revisão</h2>
+      <p>Texto informativo-argumentativo sobre celulares e crianças</p>
+    </div>
+  </div>
+
+  <div class="callout callout-amber">
+    <span class="callout-icon">📖</span>
+    <div>Leia com atenção o texto completo disponibilizado via <strong>Toddle</strong>. Abaixo está o fragmento inicial. Utilize o texto para responder às questões da seção seguinte.</div>
+  </div>
+
+  <div class="texto-box" style="margin-top:16px">
+    <div class="label">Fragmento do texto</div>
+    <p>Ter um celular é essencial para as atividades da vida diária: fazer ligações, checar mensagens, acessar informações e se comunicar com o mundo. <strong>Dá-los para crianças, no entanto</strong>, é uma decisão que merece reflexão cuidadosa...</p>
+    <p style="margin-top:12px;font-size:13px;color:#7a5c1a"><em>(Continua no texto completo disponível via Toddle — Ms. Ivana Tavares)</em></p>
+  </div>
+
+  <div style="margin-top:16px">
+    <p style="font-size:14px;font-weight:600;color:#1e293b;margin-bottom:10px">Enquanto lê, identifique:</p>
+    <div class="tag-grid">
+      <span class="tag tag-blue">🎯 Qual é a tese?</span>
+      <span class="tag tag-teal">📊 Quais os argumentos?</span>
+      <span class="tag tag-amber">🔍 Há dados ou citações?</span>
+      <span class="tag tag-purple">🔗 Quais os conectivos usados?</span>
+      <span class="tag tag-coral">📌 Qual é a conclusão?</span>
+    </div>
+  </div>
+</section>
+
+<!-- EXERCÍCIOS -->
+<section id="exercicios">
+  <div class="section-header">
+    <div class="section-icon" style="background:#E1F5EE">✏️</div>
+    <div>
+      <h2>Exercícios para Praticar</h2>
+      <p>Escreva suas respostas nos campos abaixo</p>
+    </div>
+  </div>
+
+  <div class="category-label">Interpretação Textual</div>
+
+  <div class="question-card">
+    <div class="q-num">Questão 1</div>
+    <p>Qual é a <strong>tese</strong> defendida no texto? Transcreva do texto a passagem que melhor a representa e explique com suas palavras.</p>
+    <textarea class="answer-area" placeholder="Escreva sua resposta aqui..."></textarea>
+  </div>
+
+  <div class="question-card">
+    <div class="q-num">Questão 2</div>
+    <p>Identifique <strong>dois argumentos</strong> utilizados pelo autor para sustentar sua tese. Para cada argumento, explique por que ele é convincente.</p>
+    <textarea class="answer-area" placeholder="Argumento 1: ...&#10;&#10;Argumento 2: ..."></textarea>
+  </div>
+
+  <div class="question-card">
+    <div class="q-num">Questão 3</div>
+    <p>Que <strong>recursos de efeito de verdade</strong> o autor utiliza no texto? Cite exemplos e explique como cada um contribui para a argumentação.</p>
+    <textarea class="answer-area" placeholder="Escreva sua resposta aqui..."></textarea>
+  </div>
+
+  <div class="category-label">Gramática</div>
+
+  <div class="question-card">
+    <div class="q-num">Questão 4</div>
+    <p>Classifique o período abaixo e identifique e classifique cada oração:</p>
+    <div class="callout callout-blue" style="margin:10px 0">
+      <span>📌</span><div><em>"Sei que o celular é útil, mas é preciso que seu uso seja controlado."</em></div>
+    </div>
+    <textarea class="answer-area" placeholder="Tipo de período: ...&#10;&#10;Oração 1: ...&#10;Oração 2: ...&#10;Oração 3: ..."></textarea>
+  </div>
+
+  <div class="question-card">
+    <div class="q-num">Questão 5</div>
+    <p>Qual é a <strong>função sintática do pronome relativo</strong> em cada frase? Justifique.</p>
+    <div class="callout callout-blue" style="margin:10px 0">
+      <span>📌</span><div><em>a) "Os aparelhos que compramos são modernos."<br>b) "O livro de que gosto é interessante."<br>c) "A professora a quem recorri me ajudou."</em></div>
+    </div>
+    <textarea class="answer-area" placeholder="a) ...&#10;b) ...&#10;c) ..." style="min-height:100px"></textarea>
+  </div>
+
+  <div class="question-card">
+    <div class="q-num">Questão 6</div>
+    <p>Em cada frase, o "que" sublinhado é <strong>pronome relativo</strong> ou <strong>conjunção integrante</strong>? Justifique sua resposta.</p>
+    <div class="callout callout-blue" style="margin:10px 0">
+      <span>📌</span><div><em>a) "Espero <u>que</u> você venha."<br>b) "O filme <u>que</u> assisti foi ótimo."<br>c) "É importante <u>que</u> estudemos."</em></div>
+    </div>
+    <textarea class="answer-area" placeholder="a) ...&#10;b) ...&#10;c) ..." style="min-height:100px"></textarea>
+  </div>
+
+  <div class="question-card">
+    <div class="q-num">Questão 7</div>
+    <p>Reescreva usando <strong>oração subordinada adjetiva explicativa</strong> e depois <strong>restritiva</strong>, observando o uso das vírgulas e a diferença de sentido:</p>
+    <div class="callout callout-blue" style="margin:10px 0">
+      <span>📌</span><div><em>"Os alunos estudaram muito. Eles passaram na prova."</em></div>
+    </div>
+    <textarea class="answer-area" placeholder="Explicativa: ...&#10;&#10;Restritiva: ...&#10;&#10;Diferença de sentido: ..."></textarea>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+  <div class="section-header">
+    <div class="section-icon" style="background:#EEEDFE">🧠</div>
+    <div>
+      <h2>Quiz Rápido</h2>
+      <p>Teste seus conhecimentos — 8 questões de múltipla escolha</p>
+    </div>
+  </div>
+
+  <div class="quiz-progress" id="progress-dots"></div>
+  <div id="quiz-container"></div>
+  <div class="quiz-score" id="quiz-score">
+    <div class="score-big" id="score-num"></div>
+    <div class="score-label" id="score-msg"></div>
+    <button id="restart-btn" onclick="restartQuiz()">↺ Refazer Quiz</button>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist">
+  <div class="section-header">
+    <div class="section-icon" style="background:#EAF3DE">✅</div>
+    <div>
+      <h2>Checklist de Estudo</h2>
+      <p>Clique nos itens para marcar como concluído</p>
+    </div>
+  </div>
+
+  <div class="progress-bar-wrap"><div class="progress-bar" id="check-bar" style="width:0%"></div></div>
+  <p class="progress-label" id="check-label">0 de 12 concluídos</p>
+
+  <ul class="checklist" id="checklist-items">
+    <li onclick="checkItem(this)"><span class="check-box"></span>Reli minhas anotações do caderno</li>
+    <li onclick="checkItem(this)"><span class="check-box"></span>Estudei o que é texto informativo-argumentativo</li>
+    <li onclick="checkItem(this)"><span class="check-box"></span>Sei identificar tese, argumentos e efeito de verdade</li>
+    <li onclick="checkItem(this)"><span class="check-box"></span>Sei a diferença entre frase, oração e período</li>
+    <li onclick="checkItem(this)"><span class="check-box"></span>Conheço os 6 tipos de oração subordinada substantiva</li>
+    <li onclick="checkItem(this)"><span class="check-box"></span>Sei a diferença entre adjetiva restritiva e explicativa</li>
+    <li onclick="checkItem(this)"><span class="check-box"></span>Entendo o uso das vírgulas nas adjetivas</li>
+    <li onclick="checkItem(this)"><span class="check-box"></span>Sei identificar pronome relativo pelo antecedente</li>
+    <li onclick="checkItem(this)"><span class="check-box"></span>Sei identificar conjunção integrante (sem antecedente)</li>
+    <li onclick="checkItem(this)"><span class="check-box"></span>Entendo a regência com pronome relativo</li>
+    <li onclick="checkItem(this)"><span class="check-box"></span>Fiz os exercícios deste guia</li>
+    <li onclick="checkItem(this)"><span class="check-box"></span>Fiz o quiz e revisei os erros</li>
+  </ul>
+</section>
+
+<!-- DICAS -->
+<section id="dicas">
+  <div class="section-header">
+    <div class="section-icon" style="background:#FAECE7">💡</div>
+    <div>
+      <h2>Orientações de Estudo</h2>
+      <p>Estratégias indicadas pela professora</p>
+    </div>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">📓</div>
+      <h4>Caderno em mãos</h4>
+      <p>Revise todas as suas anotações de aula. As explicações da professora são o guia mais direto para a prova.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📱</div>
+      <h4>Material no Toddle</h4>
+      <p>Acesse o texto completo e os materiais extras disponibilizados pela Ms. Ivana via Toddle.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🔁</div>
+      <h4>Refaça avaliações</h4>
+      <p>Corrija os exercícios e avaliações contínuas anteriores. Os erros são os melhores professores.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📖</div>
+      <h4>Gramática de apoio</h4>
+      <p>Use a gramática adotada pela escola para consultar regras de subordinação e pronome relativo.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🗣️</div>
+      <h4>Explique em voz alta</h4>
+      <p>Tente explicar os conceitos em voz alta, como se você fosse a professora. Isso consolida o aprendizado.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">⏰</div>
+      <h4>Distribua o estudo</h4>
+      <p>Não deixe tudo para a véspera. Estude um tópico por dia e revise o anterior antes de avançar.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <strong>Guia de Estudos — Língua Portuguesa · Year 9</strong><br>
+  MapleBear · Ms. Ivana Tavares · Material de uso pessoal para estudo
+</footer>
+
+<script>
+// ACCORDION
+function toggle(el) {
+  el.classList.toggle('open');
+  const body = el.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// NAV HIGHLIGHT
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+// CHECKLIST
+function checkItem(el) {
+  el.classList.toggle('checked');
+  if (el.classList.contains('checked')) el.querySelector('.check-box').textContent = '✓';
+  else el.querySelector('.check-box').textContent = '';
+  updateProgress();
+}
+function updateProgress() {
+  const items = document.querySelectorAll('#checklist-items li');
+  const done = document.querySelectorAll('#checklist-items li.checked').length;
+  const pct = Math.round(done / items.length * 100);
+  document.getElementById('check-bar').style.width = pct + '%';
+  document.getElementById('check-label').textContent = done + ' de ' + items.length + ' concluídos';
+}
+
+// QUIZ
+const questions = [
+  {
+    q: "Qual é a principal característica do texto informativo-argumentativo?",
+    opts: ["Narrar uma história com personagens fictícios", "Expor informações e defender uma posição com argumentos", "Descrever paisagens e ambientes com detalhes", "Instruir o leitor sobre como realizar uma tarefa"],
+    ans: 1,
+    fb: "O texto informativo-argumentativo combina exposição de informações com defesa de uma tese mediante argumentos. O autor quer convencer o leitor."
+  },
+  {
+    q: "O que é o 'efeito de verdade' em um texto argumentativo?",
+    opts: ["É quando o texto é completamente verdadeiro e sem opiniões", "São os recursos usados para tornar o texto mais convincente, como dados e citações", "É a conclusão final do texto", "É o título do texto que resume a tese"],
+    ans: 1,
+    fb: "O efeito de verdade são estratégias discursivas (estatísticas, citações de autoridade, vocabulário técnico) que fazem o texto parecer mais confiável e convencem o leitor."
+  },
+  {
+    q: "Em 'É preciso que estudemos bastante.', a oração sublinhada é:",
+    opts: ["Subordinada adjetiva restritiva", "Subordinada substantiva subjetiva", "Subordinada adjetiva explicativa", "Subordinada substantiva objetiva direta"],
+    ans: 1,
+    fb: "'Que estudemos bastante' exerce a função de SUJEITO de 'é preciso'. Sempre que a oração com 'que' for sujeito, será uma subordinada substantiva SUBJETIVA."
+  },
+  {
+    q: "Qual é a diferença entre as adjetivas restritiva e explicativa?",
+    opts: ["A restritiva usa 'que' e a explicativa usa 'quem'", "A restritiva limita o antecedente (sem vírgulas); a explicativa acrescenta informação extra (com vírgulas)", "A restritiva aparece no início da frase; a explicativa no final", "Não há diferença; são termos sinônimos"],
+    ans: 1,
+    fb: "A restritiva restringe/delimita o antecedente (sem vírgulas). A explicativa apenas acrescenta uma informação, que pode ser removida sem alterar o sentido essencial (com vírgulas)."
+  },
+  {
+    q: "Em 'O livro de que gosto está aqui.', o pronome relativo 'que' exerce qual função?",
+    opts: ["Sujeito", "Objeto direto", "Objeto indireto", "Adjunto adverbial"],
+    ans: 2,
+    fb: "'Gosto DE quê?' — o verbo 'gostar' exige objeto indireto com a preposição 'de'. Por isso 'de que' = objeto indireto. A preposição antes do pronome relativo é exigida pelo verbo da oração subordinada."
+  },
+  {
+    q: "Em qual frase o 'que' é CONJUNÇÃO INTEGRANTE (e não pronome relativo)?",
+    opts: ["'O filme que assisti foi ótimo.'", "'A professora que me ensinou é boa.'", "'Espero que você venha amanhã.'", "'O livro de que preciso está em falta.'"],
+    ans: 2,
+    fb: "Em 'Espero que você venha', o 'que' não retoma nenhum antecedente e não tem função sintática — é apenas uma conjunção que introduz a oração. Já nas outras frases, 'que' retoma um substantivo (filme, professora, livro)."
+  },
+  {
+    q: "'Os alunos que estudaram passaram.' — Esta oração adjetiva é:",
+    opts: ["Explicativa, pois está entre vírgulas", "Restritiva, pois restringe quais alunos passaram (só os que estudaram)", "Explicativa, pois todos os alunos estudaram", "Nenhuma das anteriores"],
+    ans: 1,
+    fb: "Sem vírgulas, a adjetiva é RESTRITIVA: ela limita o grupo — apenas os alunos que estudaram passaram. Se fosse explicativa (com vírgulas), significaria que todos os alunos estudaram e todos passaram."
+  },
+  {
+    q: "Para substituir um pronome relativo e confirmar que é PR (e não conjunção), use:",
+    opts: ["Trocar 'que' por 'porque'", "Trocar 'que' por 'o qual / a qual'", "Trocar 'que' por 'se'", "Trocar 'que' por 'pois'"],
+    ans: 1,
+    fb: "Se você conseguir substituir 'que' por 'o qual / a qual' (concordando com o antecedente), é pronome relativo. Ex: 'O livro que li' → 'O livro o qual li' ✓. 'Sei que virás' → 'Sei o qual virás' ✗ — logo, é conjunção."
+  }
+];
+
+let answered = [];
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-container');
+  const dots = document.getElementById('progress-dots');
+  container.innerHTML = '';
+  dots.innerHTML = '';
+  answered = [];
+
+  questions.forEach((q, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'prog-dot';
+    dot.id = 'dot-' + i;
+    dots.appendChild(dot);
+
+    const card = document.createElement('div');
+    card.className = 'quiz-card';
+    card.id = 'qcard-' + i;
+
+    const p = document.createElement('p');
+    p.textContent = (i + 1) + '. ' + q.q;
+    card.appendChild(p);
+
+    const opts = document.createElement('div');
+    opts.className = 'options';
+    const letters = ['A', 'B', 'C', 'D'];
+
+    q.opts.forEach((opt, j) => {
+      const btn = document.createElement('div');
+      btn.className = 'option';
+      btn.innerHTML = '<span class="option-letter">' + letters[j] + '</span>' + opt;
+      btn.onclick = () => answer(i, j, btn, card);
+      opts.appendChild(btn);
+    });
+    card.appendChild(opts);
+
+    const fb = document.createElement('div');
+    fb.className = 'feedback';
+    fb.id = 'fb-' + i;
+    card.appendChild(fb);
+
+    container.appendChild(card);
+  });
+}
+
+function answer(qi, chosen, btn, card) {
+  if (answered[qi] !== undefined) return;
+  answered[qi] = chosen;
+  const q = questions[qi];
+  const allOpts = card.querySelectorAll('.option');
+  allOpts.forEach(o => o.classList.add('disabled'));
+
+  const isCorrect = chosen === q.ans;
+  btn.classList.add(isCorrect ? 'correct' : 'wrong');
+  allOpts[q.ans].classList.add('correct');
+
+  const fb = document.getElementById('fb-' + qi);
+  fb.classList.add('show', isCorrect ? 'ok' : 'err');
+  fb.textContent = (isCorrect ? '✅ Correto! ' : '❌ Incorreto. ') + q.fb;
+
+  const dot = document.getElementById('dot-' + qi);
+  dot.classList.add(isCorrect ? 'done-ok' : 'done-err');
+
+  if (answered.filter(a => a !== undefined).length === questions.length) showScore();
+}
+
+function showScore() {
+  const correct = answered.filter((a, i) => a === questions[i].ans).length;
+  const pct = Math.round(correct / questions.length * 100);
+  const score = document.getElementById('quiz-score');
+  score.style.display = 'block';
+  document.getElementById('score-num').textContent = correct + ' / ' + questions.length;
+  const msgs = ['Continue estudando! 💪', 'Bom começo! Revise os erros 📖', 'Indo bem! Quase lá 🎯', 'Muito bom! Só um detalhe 🌟', 'Excelente! Você está pronto! 🏆'];
+  document.getElementById('score-msg').textContent = msgs[Math.floor(pct / 25)] || msgs[4];
+  score.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function restartQuiz() {
+  document.getElementById('quiz-score').style.display = 'none';
+  buildQuiz();
+  document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
